@@ -46,6 +46,17 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
+        private void clearEntry_OnClick(object? sender, RoutedEventArgs args) {
+            currentLabel.Content = "0";
+            currentLabelContentChanged();
+        }
+
+        private void clear_OnClick(object? sender, RoutedEventArgs args) {
+            currentLabel.Content = "0";
+            historyLabel.Content = "";
+            currentLabelContentChanged();
+        }
+
         private void currentLabelContentChanged() {
             string? currentString = (currentLabel.Content as string);
             if(currentString?.Length > 7) {
