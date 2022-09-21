@@ -48,37 +48,37 @@
       <Button Grid.Row="1" Grid.Column="3" Name="divideButton">
         /
       </Button>
-      <Button Grid.Row="2" Grid.Column="0" Name="sevenButton">
+      <Button Grid.Row="2" Grid.Column="0" Name="sevenButton" Click="numberButton_OnClick">
         7
       </Button>
-      <Button Grid.Row="2" Grid.Column="1" Name="eightButton">
+      <Button Grid.Row="2" Grid.Column="1" Name="eightButton" Click="numberButton_OnClick">
         8
       </Button>
-      <Button Grid.Row="2" Grid.Column="2" Name="nineButton">
+      <Button Grid.Row="2" Grid.Column="2" Name="nineButton" Click="numberButton_OnClick">
         9
       </Button>
       <Button Grid.Row="2" Grid.Column="3" Name="timesButton">
         &#10761;
       </Button>
-      <Button Grid.Row="3" Grid.Column="0" Name="fourButton">
+      <Button Grid.Row="3" Grid.Column="0" Name="fourButton" Click="numberButton_OnClick">
         4
       </Button>
-      <Button Grid.Row="3" Grid.Column="1" Name="fiveButton">
+      <Button Grid.Row="3" Grid.Column="1" Name="fiveButton" Click="numberButton_OnClick">
         5
       </Button>
-      <Button Grid.Row="3" Grid.Column="2" Name="sixButton">
+      <Button Grid.Row="3" Grid.Column="2" Name="sixButton" Click="numberButton_OnClick">
         6
       </Button>
       <Button Grid.Row="3" Grid.Column="3" Name="minusButton">
         &#8212;
       </Button>
-      <Button Grid.Row="4" Grid.Column="0" Name="oneButton">
+      <Button Grid.Row="4" Grid.Column="0" Name="oneButton" Click="numberButton_OnClick">
         1
       </Button>
-      <Button Grid.Row="4" Grid.Column="1" Name="twoButton">
+      <Button Grid.Row="4" Grid.Column="1" Name="twoButton" Click="numberButton_OnClick">
         2
       </Button>
-      <Button Grid.Row="4" Grid.Column="2" Name="threeButton">
+      <Button Grid.Row="4" Grid.Column="2" Name="threeButton" Click="numberButton_OnClick">
         3
       </Button>
       <Button Grid.Row="4" Grid.Column="3" Name="plusButton">
@@ -87,7 +87,7 @@
       <Button Grid.Row="5" Grid.Column="0" Name="negateButton">
         &#x207a;&#x2044;&#x208b;
       </Button>
-      <Button Grid.Row="5" Grid.Column="1" Name="zeroButton">
+      <Button Grid.Row="5" Grid.Column="1" Name="zeroButton" Click="numberButton_OnClick">
         0
       </Button>
       <Button Grid.Row="5" Grid.Column="2" Name="comaButton">
