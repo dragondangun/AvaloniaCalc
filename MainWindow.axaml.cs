@@ -12,7 +12,7 @@ namespace AvaloniaCalc {
 
         private void numberButton_OnClick(object? sender, RoutedEventArgs args) {
             string? currentString = (currentLabel.Content as string);
-            bool? isFractional = currentString?.Contains(',');
+            bool? isFractional = currentString?.Contains('.');
 
             //explicit bool comprasion cause of nullable bool
             if(isFractional == false && currentString?.Length >= 16 || isFractional == true && currentString?.Length >= 17) {
