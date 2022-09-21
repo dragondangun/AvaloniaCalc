@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
+using System.ComponentModel;
 
 namespace AvaloniaCalc {
     public partial class MainWindow:Window {
@@ -14,18 +15,34 @@ namespace AvaloniaCalc {
             bool? isFractional = currentString?.Contains(',');
 
             //explicit bool comprasion cause of nullable bool
-            if(isFractional==false && currentString?.Length >= 16 || isFractional==true && currentString?.Length >= 17) {
-                return;
+            if(isFractional == false && currentString?.Length >= 16 || isFractional == true && currentString?.Length >= 17) {
             }
-
-            if(currentString?.Length == 1 && Convert.ToDouble(currentString) == 0) {
+            else if(currentString?.Length == 1 && Convert.ToDouble(currentString) == 0) {
                 currentLabel.Content = (sender as Button)?.Content;
-                return;
+            }
+            else {
+                string? senderString = ((sender as Button)?.Content as string);
+                currentLabel.Content = $"{currentString}{senderString}";
             }
 
-            string? senderString = ((sender as Button)?.Content as string);
+            currentLabelContentChanged();
+        }
 
-            currentLabel.Content = $"{currentString}{senderString}";
+        private void currentLabelContentChanged() {
+            string? currentString = (currentLabel.Content as string);
+            if(currentString?.Length > 7) {
+                currentLabel.FontSize = 42;
+            }
+            else {
+                currentLabel.FontSize = 55;
+            }
+
+            currentLabel.FontSize = currentString?.Length switch {
+                <= 7 => 55,
+                > 7 and < 10 => 42,
+                >= 10 => 29,
+                null => 55
+            };
         }
 
     }
