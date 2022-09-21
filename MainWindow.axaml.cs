@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using System;
 using System.ComponentModel;
 
@@ -11,8 +12,23 @@ namespace AvaloniaCalc {
         }
 
         Operations operation = Operations.none;
+        bool errorHappened = false;
+
+        //private IBrush _textbox3Foreground;
+
+        //public IBrush Textbox3Foreground {
+        //    get { return _textbox3Foreground; }
+        //    set {
+        //        this.RaiseAndSetIfChanged(ref _textbox3Foreground, value);
+        //    }
+        //}
 
         private void numberButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
             string? currentString = (currentLabel.Content as string);
             bool? isFractional = currentString?.Contains('.');
             bool? isNegative = currentString?.Contains('-');
@@ -35,6 +51,11 @@ namespace AvaloniaCalc {
         }
 
         private void eraseButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
             string? currentString = (currentLabel.Content as string);
             bool? isNegative = currentString?.StartsWith('-');
 
@@ -49,12 +70,28 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
+
+
         private void clearEntryButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
             currentLabel.Content = "0";
             currentLabelContentChanged();
         }
 
         private void clearButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
+            clear();
+        }
+
+        private void clear() {
             operation = Operations.none;
             currentLabel.Content = "0";
             historyLabel.Content = "";
@@ -62,6 +99,11 @@ namespace AvaloniaCalc {
         }
 
         private void dotButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
             string? currentString = (currentLabel.Content as string);
             bool? isFractional = currentString?.Contains('.');
             
@@ -75,6 +117,11 @@ namespace AvaloniaCalc {
         }
 
         private void negateButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
             string? currentString = (currentLabel.Content as string);
 
             if(currentString?.Length == 1 && Convert.ToDouble(currentString) == 0) {
@@ -95,6 +142,11 @@ namespace AvaloniaCalc {
         }
 
         private void operationButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
             string? currentString = (currentLabel.Content as string);
             string? senderString = (sender as Button)?.Content as string;
             string? historyString = historyLabel.Content as string;
@@ -152,20 +204,28 @@ namespace AvaloniaCalc {
                     currentLabelContentChanged();
                     return;
                 }
-
             }
-            catch(Exception ex) {
+            catch(Exception) {
+                OnError();
                 return;
             }
+
+            if(double.IsNaN(result) || double.IsInfinity(result)) {
+                OnError();
+                return;
+            }
+
 
             if(operation != Operations.equal) {
                 historyLabel.Content = $"{result} {senderString}";
                 currentLabel.Content = "0";
             }
+            else if(prevOperation == Operations.equal) { 
+                clear();
+            }
             else {
                 historyLabel.Content = $"{historyString} {currentString} =";
                 currentLabel.Content = result.ToString();
-                operation = Operations.none;
             }
 
             currentLabelContentChanged();
@@ -199,5 +259,17 @@ namespace AvaloniaCalc {
             equal
         }
 
+        void OnErrorSkip() {
+            errorHappened = false;
+            clear();
+            currentLabel.Foreground = Brushes.Black;
+        }
+
+        void OnError() {
+            clear();
+            errorHappened = true;
+            currentLabel.Content = "ОШИБКА";
+            currentLabel.Foreground = Brushes.Red;
+        }
     }
 }
