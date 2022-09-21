@@ -45,7 +45,7 @@
       <Button Grid.Row="1" Grid.Column="2" Name="sqruareRootButton" FontSize="20">
         sqrt(x)
       </Button>
-      <Button Grid.Row="1" Grid.Column="3" Name="divideButton">
+      <Button Grid.Row="1" Grid.Column="3" Name="divideButton" Click="operationButton_OnClick">
         /
       </Button>
       <Button Grid.Row="2" Grid.Column="0" Name="sevenButton" Click="numberButton_OnClick">
@@ -57,7 +57,7 @@
       <Button Grid.Row="2" Grid.Column="2" Name="nineButton" Click="numberButton_OnClick">
         9
       </Button>
-      <Button Grid.Row="2" Grid.Column="3" Name="timesButton">
+      <Button Grid.Row="2" Grid.Column="3" Name="timesButton" Click="operationButton_OnClick">
         &#10761;
       </Button>
       <Button Grid.Row="3" Grid.Column="0" Name="fourButton" Click="numberButton_OnClick">
@@ -69,7 +69,7 @@
       <Button Grid.Row="3" Grid.Column="2" Name="sixButton" Click="numberButton_OnClick">
         6
       </Button>
-      <Button Grid.Row="3" Grid.Column="3" Name="minusButton">
+      <Button Grid.Row="3" Grid.Column="3" Name="minusButton" Click="operationButton_OnClick">
         &#8212;
       </Button>
       <Button Grid.Row="4" Grid.Column="0" Name="oneButton" Click="numberButton_OnClick">
@@ -81,7 +81,7 @@
       <Button Grid.Row="4" Grid.Column="2" Name="threeButton" Click="numberButton_OnClick">
         3
       </Button>
-      <Button Grid.Row="4" Grid.Column="3" Name="plusButton">
+      <Button Grid.Row="4" Grid.Column="3" Name="plusButton" Click="operationButton_OnClick">
         +
       </Button>
       <Button Grid.Row="5" Grid.Column="0" Name="negateButton" Click="negateButton_OnClick">
@@ -93,7 +93,7 @@
       <Button Grid.Row="5" Grid.Column="2" Name="dotButton" Click="dotButton_OnClick">
         .
       </Button>
-      <Button Grid.Row="5" Grid.Column="3" Name="equalButton">
+      <Button Grid.Row="5" Grid.Column="3" Name="equalButton" Click="operationButton_OnClick">
         =
       </Button>
     </Grid>

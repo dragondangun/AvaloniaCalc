@@ -1,4 +1,4 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
 using System.ComponentModel;
@@ -9,6 +9,8 @@ namespace AvaloniaCalc {
             InitializeComponent();
             historyLabel.Content = "";
         }
+
+        Operations operation = Operations.none;
 
         private void numberButton_OnClick(object? sender, RoutedEventArgs args) {
             string? currentString = (currentLabel.Content as string);
@@ -53,6 +55,7 @@ namespace AvaloniaCalc {
         }
 
         private void clearButton_OnClick(object? sender, RoutedEventArgs args) {
+            operation = Operations.none;
             currentLabel.Content = "0";
             historyLabel.Content = "";
             currentLabelContentChanged();
@@ -91,6 +94,83 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
+        private void operationButton_OnClick(object? sender, RoutedEventArgs args) {
+            string? currentString = (currentLabel.Content as string);
+            string? senderString = (sender as Button)?.Content as string;
+            string? historyString = historyLabel.Content as string;
+
+            Operations prevOperation = operation;
+
+            switch(senderString) {
+                case "+":
+                    operation = Operations.plus;
+                    break;
+                case @"⨉":
+                    operation = Operations.times;
+                    break;
+                case "/":
+                    operation = Operations.divide;
+                    break;
+                case @"—":
+                    operation = Operations.minus;
+                    break;
+                case "=":
+                    operation = Operations.equal;
+                    break;
+            }
+            
+            double result = double.MinValue;
+
+            try {
+                if(prevOperation != Operations.none) {
+                    string? left = (historyLabel.Content as string)?.Split(' ')[0];
+                    string? right = currentLabel.Content as string;
+                    double leftPart = Convert.ToDouble(left);
+                    double rightPart = Convert.ToDouble(right);
+                    switch(prevOperation) {
+                        case Operations.plus: {
+                            result = leftPart + rightPart;
+                            break;
+                        }
+                        case Operations.minus: {
+                            result = leftPart - rightPart;
+                            break;
+                        }
+                        case Operations.times: {
+                            result = leftPart * rightPart;
+                            break;
+                        }
+                        case Operations.divide: {
+                            result = leftPart / rightPart;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    historyLabel.Content = $"{currentString} {senderString}";
+                    currentLabel.Content = "0";
+                    currentLabelContentChanged();
+                    return;
+                }
+
+            }
+            catch(Exception ex) {
+                return;
+            }
+
+            if(operation != Operations.equal) {
+                historyLabel.Content = $"{result} {senderString}";
+                currentLabel.Content = "0";
+            }
+            else {
+                historyLabel.Content = $"{historyString} {currentString} =";
+                currentLabel.Content = result.ToString();
+                operation = Operations.none;
+            }
+
+            currentLabelContentChanged();
+        }
+
         private void currentLabelContentChanged() {
             string? currentString = (currentLabel.Content as string);
             if(currentString?.Length > 7) {
@@ -108,6 +188,15 @@ namespace AvaloniaCalc {
                 >= 15 => 26,
                 null => 55
             };
+        }
+
+        enum Operations {
+            none = 0,
+            plus,
+            minus,
+            times,
+            divide,
+            equal
         }
 
     }
