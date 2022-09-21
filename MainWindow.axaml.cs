@@ -13,9 +13,13 @@ namespace AvaloniaCalc {
         private void numberButton_OnClick(object? sender, RoutedEventArgs args) {
             string? currentString = (currentLabel.Content as string);
             bool? isFractional = currentString?.Contains('.');
+            bool? isNegative = currentString?.Contains('-');
 
             //explicit bool comprasion cause of nullable bool
-            if(isFractional == false && currentString?.Length >= 16 || isFractional == true && currentString?.Length >= 17) {
+            if(isFractional == false && isNegative== false && currentString?.Length >= 16 ||
+                (isFractional ^ isNegative) == true && currentString?.Length >= 17 ||
+                    isFractional == true && isNegative == true && currentString?.Length >= 18)
+            {
             }
             else if(currentString?.Length == 1 && Convert.ToDouble(currentString) == 0) {
                 currentLabel.Content = (sender as Button)?.Content;
