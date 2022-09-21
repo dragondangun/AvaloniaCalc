@@ -70,6 +70,26 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
+        private void negateButton_OnClick(object? sender, RoutedEventArgs args) {
+            string? currentString = (currentLabel.Content as string);
+
+            if(currentString?.Length == 1 && Convert.ToDouble(currentString) == 0) {
+                return;
+            }
+            
+            bool? isNegative = currentString?.StartsWith('-');
+
+            if(isNegative == true) {
+                currentLabel.Content = $"{(currentLabel.Content as string)?.TrimStart('-')}";
+            }
+            else {
+                currentLabel.Content = $"-{currentLabel.Content as string}";
+            }
+
+
+            currentLabelContentChanged();
+        }
+
         private void currentLabelContentChanged() {
             string? currentString = (currentLabel.Content as string);
             if(currentString?.Length > 7) {

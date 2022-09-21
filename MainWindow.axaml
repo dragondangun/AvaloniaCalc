@@ -84,7 +84,7 @@
       <Button Grid.Row="4" Grid.Column="3" Name="plusButton">
         +
       </Button>
-      <Button Grid.Row="5" Grid.Column="0" Name="negateButton">
+      <Button Grid.Row="5" Grid.Column="0" Name="negateButton" Click="negateButton_OnClick">
         &#x207a;&#x2044;&#x208b;
       </Button>
       <Button Grid.Row="5" Grid.Column="1" Name="zeroButton" Click="numberButton_OnClick">
