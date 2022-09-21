@@ -2,8 +2,100 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="335" d:DesignHeight="450"
+        Width="335" Height="450"
+        MinWidth="294" MinHeight="349"
         x:Class="AvaloniaCalc.MainWindow"
         Title="AvaloniaCalc">
-    Welcome to Avalonia!
+  <Grid RowDefinitions="Auto, Auto, *">
+    <Label Grid.Row="0" x:Name="historyLabel" Margin="0,15,15,0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="16" Foreground="Gray">
+      0
+    </Label>
+    <Label Grid.Row="1" x:Name="currentLabel" Margin="0,0,15,0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="55" FontWeight="Black">
+      0
+    </Label>
+    <Grid Grid.Row="2" RowDefinitions="*, *, *, *, *, *" ColumnDefinitions="*, *, *, *">
+      <Grid.Styles>
+        <Style Selector="Button">
+          <Setter Property="HorizontalAlignment" Value="Stretch"/>
+          <Setter Property="VerticalAlignment" Value="Stretch"/>
+          <Setter Property="HorizontalContentAlignment" Value="Center"/>
+          <Setter Property="VerticalContentAlignment" Value="Center"/>
+          <Setter Property="FontSize" Value="25"/>
+        </Style>
+      </Grid.Styles>
+      <Button Grid.Row="0" Grid.Column="0" Name="percentButton">
+        %
+      </Button>
+      <Button Grid.Row="0" Grid.Column="1" Name="clearEntryButton">
+        CE
+      </Button>
+      <Button Grid.Row="0" Grid.Column="2" Name="clearButton">
+        C
+      </Button>
+      <Button Grid.Row="0" Grid.Column="3" Name="eraseButton">
+        &#9003;
+      </Button>
+      <Button Grid.Row="1" Grid.Column="0" Name="reverseButton">
+        1/x
+      </Button>
+      <Button Grid.Row="1" Grid.Column="1" Name="squareButton">
+        x&#178;
+      </Button>
+      <Button Grid.Row="1" Grid.Column="2" Name="sqruareRootButton" FontSize="20">
+        sqrt(x)
+      </Button>
+      <Button Grid.Row="1" Grid.Column="3" Name="divideButton">
+        /
+      </Button>
+      <Button Grid.Row="2" Grid.Column="0" Name="sevenButton">
+        7
+      </Button>
+      <Button Grid.Row="2" Grid.Column="1" Name="eightButton">
+        8
+      </Button>
+      <Button Grid.Row="2" Grid.Column="2" Name="nineButton">
+        9
+      </Button>
+      <Button Grid.Row="2" Grid.Column="3" Name="timesButton">
+        &#10761;
+      </Button>
+      <Button Grid.Row="3" Grid.Column="0" Name="fourButton">
+        4
+      </Button>
+      <Button Grid.Row="3" Grid.Column="1" Name="fiveButton">
+        5
+      </Button>
+      <Button Grid.Row="3" Grid.Column="2" Name="sixButton">
+        6
+      </Button>
+      <Button Grid.Row="3" Grid.Column="3" Name="minusButton">
+        &#8212;
+      </Button>
+      <Button Grid.Row="4" Grid.Column="0" Name="oneButton">
+        1
+      </Button>
+      <Button Grid.Row="4" Grid.Column="1" Name="twoButton">
+        2
+      </Button>
+      <Button Grid.Row="4" Grid.Column="2" Name="threeButton">
+        3
+      </Button>
+      <Button Grid.Row="4" Grid.Column="3" Name="plusButton">
+        +
+      </Button>
+      <Button Grid.Row="5" Grid.Column="0" Name="negateButton">
+        &#x207a;&#x2044;&#x208b;
+      </Button>
+      <Button Grid.Row="5" Grid.Column="1" Name="zeroButton">
+        0
+      </Button>
+      <Button Grid.Row="5" Grid.Column="2" Name="comaButton">
+        ,
+      </Button>
+      <Button Grid.Row="5" Grid.Column="3" Name="equalButton">
+        =
+      </Button>
+    </Grid>
+  </Grid>
 </Window>
