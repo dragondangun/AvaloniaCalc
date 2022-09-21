@@ -46,18 +46,18 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
-        private void clearEntry_OnClick(object? sender, RoutedEventArgs args) {
+        private void clearEntryButton_OnClick(object? sender, RoutedEventArgs args) {
             currentLabel.Content = "0";
             currentLabelContentChanged();
         }
 
-        private void clear_OnClick(object? sender, RoutedEventArgs args) {
+        private void clearButton_OnClick(object? sender, RoutedEventArgs args) {
             currentLabel.Content = "0";
             historyLabel.Content = "";
             currentLabelContentChanged();
         }
 
-        private void dot_OnClick(object? sender, RoutedEventArgs args) {
+        private void dotButton_OnClick(object? sender, RoutedEventArgs args) {
             string? currentString = (currentLabel.Content as string);
             bool? isFractional = currentString?.Contains('.');
             

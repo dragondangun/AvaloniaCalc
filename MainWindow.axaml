@@ -27,10 +27,10 @@
       <Button Grid.Row="0" Grid.Column="0" Name="percentButton">
         %
       </Button>
-      <Button Grid.Row="0" Grid.Column="1" Name="clearEntryButton" Click="clearEntry_OnClick">
+      <Button Grid.Row="0" Grid.Column="1" Name="clearEntryButton" Click="clearEntryButton_OnClick">
         CE
       </Button>
-      <Button Grid.Row="0" Grid.Column="2" Name="clearButton" Click="clear_OnClick">
+      <Button Grid.Row="0" Grid.Column="2" Name="clearButton" Click="clearButton_OnClick">
         C
       </Button>
       <Button Grid.Row="0" Grid.Column="3" Name="eraseButton" Click="eraseButton_OnClick">
@@ -90,7 +90,7 @@
       <Button Grid.Row="5" Grid.Column="1" Name="zeroButton" Click="numberButton_OnClick">
         0
       </Button>
-      <Button Grid.Row="5" Grid.Column="2" Name="dotButton" Click="dot_OnClick">
+      <Button Grid.Row="5" Grid.Column="2" Name="dotButton" Click="dotButton_OnClick">
         .
       </Button>
       <Button Grid.Row="5" Grid.Column="3" Name="equalButton">
