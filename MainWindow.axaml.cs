@@ -52,9 +52,11 @@ namespace AvaloniaCalc {
             }
 
             currentLabel.FontSize = currentString?.Length switch {
-                <= 7 => 55,
-                > 7 and < 10 => 42,
-                >= 10 => 29,
+                < 8 => 55,
+                >= 8 and < 10 => 42,
+                >= 10 and < 13 => 35,
+                >= 13 and < 15 => 29,
+                >= 15 => 26,
                 null => 55
             };
         }
