@@ -40,7 +40,7 @@ namespace AvaloniaCalc {
                 currentLabel.Content = "0";
             }
             else {
-                currentLabel.Content = $"{currentString?.Substring(0,Convert.ToInt16(currentString?.Length-1))}";
+                currentLabel.Content = $"{currentString?[..Convert.ToInt16(currentString?.Length - 1)]}";
             }
 
             currentLabelContentChanged();
