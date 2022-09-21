@@ -28,6 +28,20 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
+        private void eraseButton_OnClick(object? sender, RoutedEventArgs args) {
+            string? currentString = (currentLabel.Content as string);
+
+            //explicit bool comprasion cause of nullable bool
+            if(currentString?.Length <= 1) {
+                currentLabel.Content = "0";
+            }
+            else {
+                currentLabel.Content = $"{currentString?.Substring(0,Convert.ToInt16(currentString?.Length-1))}";
+            }
+
+            currentLabelContentChanged();
+        }
+
         private void currentLabelContentChanged() {
             string? currentString = (currentLabel.Content as string);
             if(currentString?.Length > 7) {
