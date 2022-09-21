@@ -34,9 +34,10 @@ namespace AvaloniaCalc {
 
         private void eraseButton_OnClick(object? sender, RoutedEventArgs args) {
             string? currentString = (currentLabel.Content as string);
+            bool? isNegative = currentString?.StartsWith('-');
 
             //explicit bool comprasion cause of nullable bool
-            if(currentString?.Length <= 1) {
+            if(isNegative == false && currentString?.Length <= 1 || isNegative == true && currentString?.Length <=2) {
                 currentLabel.Content = "0";
             }
             else {
