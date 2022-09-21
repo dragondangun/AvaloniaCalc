@@ -57,6 +57,19 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
+        private void dot_OnClick(object? sender, RoutedEventArgs args) {
+            string? currentString = (currentLabel.Content as string);
+            bool? isFractional = currentString?.Contains('.');
+            
+            if(isFractional == true) {
+                return;
+            }
+
+            currentLabel.Content = $"{currentLabel.Content as string}."; 
+
+            currentLabelContentChanged();
+        }
+
         private void currentLabelContentChanged() {
             string? currentString = (currentLabel.Content as string);
             if(currentString?.Length > 7) {
