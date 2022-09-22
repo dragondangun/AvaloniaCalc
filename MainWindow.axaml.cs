@@ -222,7 +222,6 @@ namespace AvaloniaCalc {
 
             string? currentString = (currentLabel.Content as string);
             string? historyString = (historyLabel.Content as string);
-            string[]? historyStringArr = historyString?.Split(' ');
             bool? isNegative = currentString?.StartsWith('-');
             double? result = null; 
 
@@ -230,25 +229,8 @@ namespace AvaloniaCalc {
                 result = 1 / double.Parse(currentString);
 
                 if(operation != Operations.none && operation != Operations.equal) {
-                    if(historyStringArr.Length < 3) {
-                        if(isNegative == false) {
-                            historyString += $" {1}/{currentString}";
-                        }
-                        else {
-                            historyString += $" {1}/({currentString})";
-                        }
-
-                    }
-                    else {
-                        if(isNegative == false) {
-                            historyStringArr[2] = $" {1}/{currentString}";
-                        }
-                        else {
-                            historyStringArr[2] = $" {1}/({currentString})";
-                        }
-
-                        historyString = $"{historyStringArr[0]} {historyStringArr[1]} {historyStringArr[2]}";
-                    }
+                    string rightOperand = isNegative == true ? $" {1}/({currentString})" : $" {1}/{currentString}";
+                    writeRightHistoryOperand(rightOperand);
                 }
                 else {
                     if(isNegative == false) {
@@ -258,10 +240,9 @@ namespace AvaloniaCalc {
                         historyString = $"{1}/({currentString})";
                     }
 
-
+                    historyLabel.Content = historyString;
                 }
 
-                historyLabel.Content = historyString;
                 currentLabel.Content = result.ToString();
 
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
@@ -367,7 +348,7 @@ namespace AvaloniaCalc {
                 clear();
             }
             else {
-                historyLabel.Content = $"{historyString} {currentString} =";
+                writeRightHistoryOperand($" {currentString} =");
                 currentLabel.Content = result.ToString();
             }
 
@@ -392,6 +373,21 @@ namespace AvaloniaCalc {
             times,
             divide,
             equal
+        }
+
+        void writeRightHistoryOperand(string rightOperand) {
+            string? historyString = (historyLabel.Content as string);
+            string[]? historyStringArr = historyString?.Split(' ');
+
+            if(historyStringArr?.Length < 3) {
+                historyString += $"{rightOperand}";
+            }
+            else {
+                historyStringArr[2] = $"{rightOperand}";
+                historyString = $"{historyStringArr[0]} {historyStringArr[1]} {historyStringArr[2]}";
+            }
+
+            historyLabel.Content = historyString;
         }
 
         void OnErrorSkip() {
