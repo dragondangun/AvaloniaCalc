@@ -132,6 +132,34 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
+        private void squareButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
+            string? currentString = (currentLabel.Content as string);
+
+            try {
+                double? result = double.Parse(currentString);
+                result *= result;
+
+                historyLabel.Content = @$"{currentString}²";
+                currentLabel.Content = result.ToString();
+
+                if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
+                    OnError();
+                    return;
+                }
+
+                currentLabelContentChanged();
+            }
+            catch(Exception) {
+                OnError();
+                return;
+            }
+        }
+
         private void reciprocalButton_OnClick(object? sender, RoutedEventArgs args) {
             if(errorHappened) {
                 OnErrorSkip();
