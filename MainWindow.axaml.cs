@@ -144,14 +144,7 @@ namespace AvaloniaCalc {
                 double? result = double.Parse(currentString);
                 result *= result;
 
-                if(operation != Operations.none && operation != Operations.equal) {
-                    writeRightHistoryOperand(@$"{currentString}²");
-                }
-                else {
-                    historyLabel.Content = @$"{currentString}²";
-                }
-
-                currentLabel.Content = result.ToString();
+                updateLabel(@$"{currentString}²", result?.ToString());
 
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
@@ -177,14 +170,7 @@ namespace AvaloniaCalc {
             try {
                 double? result = Math.Sqrt(double.Parse(currentString));
 
-                if(operation != Operations.none && operation != Operations.equal) {
-                    writeRightHistoryOperand(@$"sqrt({currentString})");
-                }
-                else {
-                    historyLabel.Content = @$"sqrt({currentString})";
-                }
-
-                currentLabel.Content = result.ToString();
+                updateLabel(@$"sqrt({currentString})", result?.ToString());
 
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
@@ -210,14 +196,7 @@ namespace AvaloniaCalc {
             try {
                 double? result = double.Parse(currentString)/100;
 
-                if(operation != Operations.none && operation != Operations.equal) {
-                    writeRightHistoryOperand(result?.ToString());
-                }
-                else {
-                    historyLabel.Content = result.ToString();
-                }
-
-                currentLabel.Content = result.ToString();
+                updateLabel(result?.ToString(), result?.ToString());
 
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
@@ -239,29 +218,15 @@ namespace AvaloniaCalc {
             }
 
             string? currentString = (currentLabel.Content as string);
-            string? historyString = (historyLabel.Content as string);
             bool? isNegative = currentString?.StartsWith('-');
             double? result = null; 
 
             try {
                 result = 1 / double.Parse(currentString);
 
-                if(operation != Operations.none && operation != Operations.equal) {
-                    string rightOperand = isNegative == true ? $" {1}/({currentString})" : $" {1}/{currentString}";
-                    writeRightHistoryOperand(rightOperand);
-                }
-                else {
-                    if(isNegative == false) {
-                        historyString = $"{1}/{currentString}";
-                    }
-                    else {
-                        historyString = $"{1}/({currentString})";
-                    }
-
-                    historyLabel.Content = historyString;
-                }
-
-                currentLabel.Content = result.ToString();
+                string rightOperand = isNegative == true ? $"{1}/({currentString})" : $"{1}/{currentString}";
+  
+                updateLabel(rightOperand, result?.ToString());
 
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
@@ -419,6 +384,17 @@ namespace AvaloniaCalc {
             errorHappened = true;
             currentLabel.Content = "ОШИБКА";
             currentLabel.Foreground = Brushes.Red;
+        }
+
+        void updateLabel(string rightOperand, string result) {
+            if(operation != Operations.none && operation != Operations.equal) {
+                writeRightHistoryOperand(@$" {rightOperand}");
+            }
+            else {
+                historyLabel.Content = @$"{rightOperand}";
+            }
+
+            currentLabel.Content = result;
         }
     }
 }
