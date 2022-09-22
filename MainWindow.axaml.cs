@@ -229,15 +229,7 @@ namespace AvaloniaCalc {
         }
 
         private void currentLabelContentChanged() {
-            string? currentString = (currentLabel.Content as string);
-            if(currentString?.Length > 7) {
-                currentLabel.FontSize = 42;
-            }
-            else {
-                currentLabel.FontSize = 55;
-            }
-
-            currentLabel.FontSize = currentString?.Length switch {
+            currentLabel.FontSize = (currentLabel.Content as string)?.Length switch {
                 < 8 => 55,
                 >= 8 and < 10 => 42,
                 >= 10 and < 13 => 35,
