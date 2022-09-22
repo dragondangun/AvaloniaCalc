@@ -187,6 +187,12 @@ namespace AvaloniaCalc {
                             result = leftPart / rightPart;
                             break;
                         }
+                        default: {
+                            historyLabel.Content = $"{currentString} {senderString}";
+                            currentLabel.Content = "0";
+                            currentLabelContentChanged();
+                            return;
+                        }
                     }
                 }
                 else {
