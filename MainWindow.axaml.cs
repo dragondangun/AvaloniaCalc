@@ -171,7 +171,13 @@ namespace AvaloniaCalc {
             try {
                 double? result = Math.Sqrt(double.Parse(currentString));
 
-                historyLabel.Content = @$"sqrt({currentString})";
+                if(operation != Operations.none && operation != Operations.equal) {
+                    writeRightHistoryOperand(@$"sqrt({currentString})");
+                }
+                else {
+                    historyLabel.Content = @$"sqrt({currentString})";
+                }
+
                 currentLabel.Content = result.ToString();
 
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
