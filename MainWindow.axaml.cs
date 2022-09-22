@@ -160,6 +160,33 @@ namespace AvaloniaCalc {
             }
         }
 
+        private void squareRootButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
+            string? currentString = (currentLabel.Content as string);
+
+            try {
+                double? result = Math.Sqrt(double.Parse(currentString));
+
+                historyLabel.Content = @$"sqrt({currentString})";
+                currentLabel.Content = result.ToString();
+
+                if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
+                    OnError();
+                    return;
+                }
+
+                currentLabelContentChanged();
+            }
+            catch(Exception) {
+                OnError();
+                return;
+            }
+        }
+
         private void reciprocalButton_OnClick(object? sender, RoutedEventArgs args) {
             if(errorHappened) {
                 OnErrorSkip();
