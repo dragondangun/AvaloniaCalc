@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="335" d:DesignHeight="450"
         Width="335" Height="450"
-        MinWidth="294" MinHeight="349"
+        MinWidth="320" MinHeight="349"
         x:Class="AvaloniaCalc.MainWindow"
         Title="AvaloniaCalc">
   <Grid RowDefinitions="Auto, Auto, *">
