@@ -24,7 +24,7 @@
           <Setter Property="FontSize" Value="25"/>
         </Style>
       </Grid.Styles>
-      <Button Grid.Row="0" Grid.Column="0" Name="percentButton">
+      <Button Grid.Row="0" Grid.Column="0" Name="percentButton" Click="percentButton_OnClick">
         %
       </Button>
       <Button Grid.Row="0" Grid.Column="1" Name="clearEntryButton" Click="clearEntryButton_OnClick">

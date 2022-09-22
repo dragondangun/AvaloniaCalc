@@ -187,6 +187,33 @@ namespace AvaloniaCalc {
             }
         }
 
+        private void percentButton_OnClick(object? sender, RoutedEventArgs args) {
+            if(errorHappened) {
+                OnErrorSkip();
+                return;
+            }
+
+            string? currentString = (currentLabel.Content as string);
+
+            try {
+                double? result = double.Parse(currentString)/100;
+
+                historyLabel.Content = result.ToString();
+                currentLabel.Content = result.ToString();
+
+                if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
+                    OnError();
+                    return;
+                }
+
+                currentLabelContentChanged();
+            }
+            catch(Exception) {
+                OnError();
+                return;
+            }
+        }
+
         private void reciprocalButton_OnClick(object? sender, RoutedEventArgs args) {
             if(errorHappened) {
                 OnErrorSkip();
