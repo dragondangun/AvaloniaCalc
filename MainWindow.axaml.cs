@@ -14,15 +14,6 @@ namespace AvaloniaCalc {
         Operations operation = Operations.none;
         bool errorHappened = false;
 
-        //private IBrush _textbox3Foreground;
-
-        //public IBrush Textbox3Foreground {
-        //    get { return _textbox3Foreground; }
-        //    set {
-        //        this.RaiseAndSetIfChanged(ref _textbox3Foreground, value);
-        //    }
-        //}
-
         private void numberButton_OnClick(object? sender, RoutedEventArgs args) {
             if(errorHappened) {
                 OnErrorSkip();
