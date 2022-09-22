@@ -36,7 +36,7 @@
       <Button Grid.Row="0" Grid.Column="3" Name="eraseButton" Click="eraseButton_OnClick">
         &#9003;
       </Button>
-      <Button Grid.Row="1" Grid.Column="0" Name="reverseButton">
+      <Button Grid.Row="1" Grid.Column="0" Name="reciprocalButton" Click="reciprocalButton_OnClick">
         1/x
       </Button>
       <Button Grid.Row="1" Grid.Column="1" Name="squareButton">
