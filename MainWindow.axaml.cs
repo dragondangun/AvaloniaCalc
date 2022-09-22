@@ -198,7 +198,13 @@ namespace AvaloniaCalc {
             try {
                 double? result = double.Parse(currentString)/100;
 
-                historyLabel.Content = result.ToString();
+                if(operation != Operations.none && operation != Operations.equal) {
+                    writeRightHistoryOperand(result?.ToString());
+                }
+                else {
+                    historyLabel.Content = result.ToString();
+                }
+
                 currentLabel.Content = result.ToString();
 
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
