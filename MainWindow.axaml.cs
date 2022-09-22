@@ -89,20 +89,20 @@ namespace AvaloniaCalc {
             currentLabelContentChanged();
         }
 
-        private void dotButton_OnClick(object? sender, RoutedEventArgs args) {
+        private void comaButton_OnClick(object? sender, RoutedEventArgs args) {
             if(errorHappened) {
                 OnErrorSkip();
                 return;
             }
 
             string? currentString = (currentLabel.Content as string);
-            bool? isFractional = currentString?.Contains('.');
+            bool? isFractional = currentString?.Contains(',');
             
             if(isFractional == true) {
                 return;
             }
 
-            currentLabel.Content = $"{currentLabel.Content as string}."; 
+            currentLabel.Content = $"{currentLabel.Content as string},"; 
 
             currentLabelContentChanged();
         }
