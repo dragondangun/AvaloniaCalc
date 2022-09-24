@@ -150,8 +150,6 @@ namespace AvaloniaCalc {
                 }
                 
                 updateLabels(@$"{currentString}²", result?.ToString());
-
-                operation = Operations.reactive;
             }
             catch(Exception) {
                 OnError();
@@ -176,8 +174,6 @@ namespace AvaloniaCalc {
                 }
 
                 updateLabels(@$"sqrt({currentString})", result?.ToString());
-
-                operation = Operations.reactive;
             }
             catch(Exception) {
                 OnError();
@@ -230,8 +226,6 @@ namespace AvaloniaCalc {
                 string rightOperand = isNegative == true ? $"{1}/({currentString})" : $"{1}/{currentString}";
   
                 updateLabels(rightOperand, result?.ToString());
-
-                operation = Operations.reactive;
             }
             catch(Exception) {
                 OnError();
