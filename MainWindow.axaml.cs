@@ -144,14 +144,12 @@ namespace AvaloniaCalc {
                 double? result = double.Parse(currentString);
                 result *= result;
 
-                updateLabel(@$"{currentString}²", result?.ToString());
-
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
                     return;
                 }
-
-                currentLabelContentChanged();
+                
+                updateLabels(@$"{currentString}²", result?.ToString());
             }
             catch(Exception) {
                 OnError();
@@ -170,14 +168,12 @@ namespace AvaloniaCalc {
             try {
                 double? result = Math.Sqrt(double.Parse(currentString));
 
-                updateLabel(@$"sqrt({currentString})", result?.ToString());
-
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
                     return;
                 }
 
-                currentLabelContentChanged();
+                updateLabels(@$"sqrt({currentString})", result?.ToString());
             }
             catch(Exception) {
                 OnError();
@@ -196,14 +192,12 @@ namespace AvaloniaCalc {
             try {
                 double? result = double.Parse(currentString)/100;
 
-                updateLabel(result?.ToString(), result?.ToString());
-
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
                     return;
                 }
 
-                currentLabelContentChanged();
+                updateLabels(result?.ToString(), result?.ToString());
             }
             catch(Exception) {
                 OnError();
@@ -224,16 +218,14 @@ namespace AvaloniaCalc {
             try {
                 result = 1 / double.Parse(currentString);
 
-                string rightOperand = isNegative == true ? $"{1}/({currentString})" : $"{1}/{currentString}";
-  
-                updateLabel(rightOperand, result?.ToString());
-
                 if(double.IsNaN(result.Value) || double.IsInfinity(result.Value)) {
                     OnError();
                     return;
                 }
 
-                currentLabelContentChanged();
+                string rightOperand = isNegative == true ? $"{1}/({currentString})" : $"{1}/{currentString}";
+  
+                updateLabels(rightOperand, result?.ToString());
             }
             catch(Exception) {
                 OnError();
@@ -386,7 +378,7 @@ namespace AvaloniaCalc {
             currentLabel.Foreground = Brushes.Red;
         }
 
-        void updateLabel(string rightOperand, string result) {
+        void updateLabels(string rightOperand, string result) {
             if(operation != Operations.none && operation != Operations.equal) {
                 writeRightHistoryOperand(@$" {rightOperand}");
             }
@@ -395,6 +387,8 @@ namespace AvaloniaCalc {
             }
 
             currentLabel.Content = result;
+
+            currentLabelContentChanged();
         }
     }
 }
