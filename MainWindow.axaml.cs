@@ -242,27 +242,10 @@ namespace AvaloniaCalc {
 
             string? currentString = (currentLabel.Content as string);
             string? senderString = (sender as Button)?.Content as string;
-            string? historyString = historyLabel.Content as string;
 
             Operations prevOperation = operation;
 
-            switch(senderString) {
-                case "+":
-                    operation = Operations.plus;
-                    break;
-                case @"⨉":
-                    operation = Operations.times;
-                    break;
-                case "/":
-                    operation = Operations.divide;
-                    break;
-                case @"—":
-                    operation = Operations.minus;
-                    break;
-                case "=":
-                    operation = Operations.equal;
-                    break;
-            }
+            operation = StringToOperations(senderString);
             
             double result = double.MinValue;
 
@@ -389,6 +372,23 @@ namespace AvaloniaCalc {
             currentLabel.Content = result;
 
             currentLabelContentChanged();
+        }
+
+        Operations StringToOperations(string s) {
+            switch(s) {
+                case "+":
+                    return Operations.plus;
+                case @"⨉":
+                    return Operations.times;
+                case "/":
+                    return Operations.divide;
+                case @"—":
+                    return Operations.minus;
+                case "=":
+                    return Operations.equal;
+                default:
+                    return Operations.none;
+            }
         }
     }
 }
