@@ -150,6 +150,8 @@ namespace AvaloniaCalc {
                 }
                 
                 updateLabels(@$"{currentString}²", result?.ToString());
+
+                operation = Operations.reactive;
             }
             catch(Exception) {
                 OnError();
@@ -174,6 +176,8 @@ namespace AvaloniaCalc {
                 }
 
                 updateLabels(@$"sqrt({currentString})", result?.ToString());
+
+                operation = Operations.reactive;
             }
             catch(Exception) {
                 OnError();
@@ -226,6 +230,8 @@ namespace AvaloniaCalc {
                 string rightOperand = isNegative == true ? $"{1}/({currentString})" : $"{1}/{currentString}";
   
                 updateLabels(rightOperand, result?.ToString());
+
+                operation = Operations.reactive;
             }
             catch(Exception) {
                 OnError();
@@ -250,34 +256,34 @@ namespace AvaloniaCalc {
             double result = double.MinValue;
 
             try {
-                if(prevOperation != Operations.none) {
+                if(prevOperation is not Operations.none) {
                     string? left = (historyLabel.Content as string)?.Split(' ')[0];
                     string? right = currentLabel.Content as string;
                     double leftPart = Convert.ToDouble(left);
                     double rightPart = Convert.ToDouble(right);
                     switch(prevOperation) {
                         case Operations.plus: {
-                            result = leftPart + rightPart;
-                            break;
-                        }
+                                result = leftPart + rightPart;
+                                break;
+                            }
                         case Operations.minus: {
-                            result = leftPart - rightPart;
-                            break;
-                        }
+                                result = leftPart - rightPart;
+                                break;
+                            }
                         case Operations.times: {
-                            result = leftPart * rightPart;
-                            break;
-                        }
+                                result = leftPart * rightPart;
+                                break;
+                            }
                         case Operations.divide: {
-                            result = leftPart / rightPart;
-                            break;
-                        }
+                                result = leftPart / rightPart;
+                                break;
+                            }
                         default: {
-                            historyLabel.Content = $"{currentString} {senderString}";
-                            currentLabel.Content = "0";
-                            currentLabelContentChanged();
-                            return;
-                        }
+                                historyLabel.Content = $"{currentString} {senderString}";
+                                currentLabel.Content = "0";
+                                currentLabelContentChanged();
+                                return;
+                            }
                     }
                 }
                 else {
@@ -287,7 +293,13 @@ namespace AvaloniaCalc {
                     return;
                 }
             }
-            catch(Exception) {
+            catch(FormatException ex) {
+                operation = prevOperation;
+                historyLabel.Content = currentLabel.Content as string;
+                operationButton_OnClick(sender, args);
+                return;
+            }
+            catch(Exception ex) {
                 OnError();
                 return;
             }
